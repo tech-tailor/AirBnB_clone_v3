@@ -52,18 +52,25 @@ class DBStorage:
         return (new_dict)
 
     def get(self, cls, id):
-        """Returns the object based on the class and its ID, or None if not found"""
-        if cls not in self.classes.values():
+        """
+        Returns the object based on the class
+        and its ID, or None if not found
+        """
+        if cls not in classes.values():
             return None
-        return self.session.query(cls).filter(cls.id == id).one_or_none()
+        return self.__session.query(cls).filter(cls.id == id).one_or_none()
 
     def count(self, cls=None):
-        """Returns the number of objects in storage matching the given class. If no class is passed, returns the count of all objects in storage."""
+        """
+        Returns the number of objects in storage matching
+        the given class. If no class is passed, returns the
+        count of all objects in storage.
+        """
         if cls:
-           return self.session.query(cls).count()
+            return self.__session.query(cls).count()
         total_count = 0
-        for cls in self.classes.values():
-            total_count += self.session.query(cls).count()
+        for cls in classes.values():
+            total_count += self.__session.query(cls).count()
         return total_count
 
     def new(self, obj):
@@ -90,8 +97,9 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
+    """
     def get(self, cls, id):
-        """get a single object from storage"""
+        get a single object from storage
         for clss in classes:
             if cls is classes[clss] or cls is clss:
                 obj = self.__session.query(classes[clss])\
@@ -100,7 +108,7 @@ class DBStorage:
         return None
 
     def count(self, cls=None):
-        """return the number of objects in the storage"""
+        return the number of objects in the storage
         total_obj = 0
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
@@ -108,3 +116,4 @@ class DBStorage:
                 for _ in objs:
                     total_obj += 1
         return total_obj
+"""

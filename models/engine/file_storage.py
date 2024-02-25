@@ -34,20 +34,22 @@ class FileStorage:
             return new_dict
         return self.__objects
 
-     def get(self, cls, id):
-         """Retrieve one object based on the class and its ID."""
-         if cls not in self.classes.values():
-             return None
-         all_objs = self.all(cls)
-         key = f"{cls.__name__}.{id}"
-         return all_objs.get(key)
+    def get(self, cls, id):
+        """Retrieve one object based on the class and its ID."""
+        if cls not in classes.values():
+            return None
+        all_objs = self.all(cls)
+        key = f"{cls.__name__}.{id}"
+        return all_objs.get(key)
 
-     def count(self, cls=None):
-         """Return the count of objects in storage. If cls is specified, count only objects of that class."""
-         if cls:
-             return len(self.all(cls))
-         return len(self.all())
-
+    def count(self, cls=None):
+        """
+        Return the count of objects in storage.
+        If cls is specified, count only objects of that class.
+        """
+        if cls:
+            return len(self.all(cls))
+        return len(self.all())
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
@@ -84,17 +86,18 @@ class FileStorage:
         """call reload() method for deserializing the JSON file to objects"""
         self.reload()
 
+    """
     def get(self, cls, id):
-        """return one object from the storage"""
+        return one object from the storage
         if cls is not None:
             for _, value in self.__objects.items():
                 if cls == value.__class__ or\
                         cls == value.__class__.__name__ and id == value['id']:
                     return value
-            return None
+        return None
 
     def count(self, cls=None):
-        """count the dictionary __objects"""
+        count the dictionary __objects
         if cls is not None:
             count = 0
             for _, value in self.__objects.items():
@@ -105,3 +108,4 @@ class FileStorage:
             for value in self.__objects:
                 count += 1
         return count
+    """
