@@ -33,9 +33,9 @@ class FileStorage:
                     new_dict[key] = value
             return new_dict
         return self.__objects
-    '''
 
-    def all(self, cls=None):
+
+    """"def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
         if cls is None:
             return self.__objects
@@ -44,8 +44,25 @@ class FileStorage:
         for key in self.__objects.keys():
             if key.split('.')[0] == cls_name:
                 dct[key] = self.__objects[key]
-        return dct
-    '''
+        return dct"""
+    
+
+    """def get(self, cls, id):
+        """Retrieve one object based on the class and its ID."""
+        if cls not in classes.values():
+            return None
+        all_objs = self.all(cls)
+        key = f"{cls.__name__}.{id}"
+        return all_objs.get(key)
+
+    def count(self, cls=None):
+        """
+        Return the count of objects in storage.
+        If cls is specified, count only objects of that class.
+        """
+        if cls:
+            return len(self.all(cls))
+        return len(self.a"""
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
@@ -68,7 +85,9 @@ class FileStorage:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
+
         except Exception as e:
+
             pass
 
     def delete(self, obj=None):

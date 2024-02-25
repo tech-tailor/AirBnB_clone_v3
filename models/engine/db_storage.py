@@ -62,11 +62,33 @@ class DBStorage:
                 return obj
         return None
 
-    def count(self, cls=None):
+    """"def count(self, cls=None):
         """count the number of objects in storage"""
-        objs = self.all(cls)
-        all_count = len(objs)
-        return (all_count)
+        #objs = self.all(cls)
+        #all_count = len(objs)
+        #return (all_count)
+
+        """
+        Returns the object based on the class
+        and its ID, or None if not found
+        """
+        #if cls not in classes.values():
+         #   return None
+        #return self.__session.query(cls).filter(cls.id == id).one_or_none()"""
+
+    def count(self, cls=None):
+        """
+        Returns the number of objects in storage matching
+        the given class. If no class is passed, returns the
+        count of all objects in storage.
+        """
+        if cls:
+            return self.__session.query(cls).count()
+        total_count = 0
+        for cls in classes.values():
+            total_count += self.__session.query(cls).count()
+        return total_count
+>>>>>>> 3261d19c6c21d0a69fde95425a9dc2dc3f24ba81
 
     def new(self, obj):
         """add the object to the current database session"""
