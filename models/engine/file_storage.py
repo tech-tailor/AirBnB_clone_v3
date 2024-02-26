@@ -34,20 +34,7 @@ class FileStorage:
             return new_dict
         return self.__objects
 
-
-    """"def all(self, cls=None):
-        """Returns a dictionary of models currently in storage"""
-        if cls is None:
-            return self.__objects
-        cls_name = cls.__name__
-        dct = {}
-        for key in self.__objects.keys():
-            if key.split('.')[0] == cls_name:
-                dct[key] = self.__objects[key]
-        return dct"""
-    
-
-    """def get(self, cls, id):
+    def get(self, cls, id):
         """Retrieve one object based on the class and its ID."""
         if cls not in classes.values():
             return None
@@ -62,7 +49,7 @@ class FileStorage:
         """
         if cls:
             return len(self.all(cls))
-        return len(self.a"""
+        return len(self.all())
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
@@ -85,9 +72,7 @@ class FileStorage:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-
-        except Exception as e:
-
+        except Exception:
             pass
 
     def delete(self, obj=None):
@@ -100,50 +85,3 @@ class FileStorage:
     def close(self):
         """call reload() method for deserializing the JSON file to objects"""
         self.reload()
-
-    def get(self, cls, id):
-        """retrieves and returns an object based on ID
-        Or None if not found
-        cls: class
-        id: string representation of object ID"""
-        dct = {}
-        # Checks if id has been provided
-        if not id:
-            return None
-
-        # Checks if class exists
-        if cls.__name__ not in classes.keys():
-            return None
-
-        try:
-            for key, value in self.__objects.items():
-                if value.__class__ == cls and value.id == id:
-                    return value
-
-        except Exception as e:
-            pass
-
-        return None
-
-    def count(self, cls=None):
-        """
-        A method to count the number of objects in storage
-        Returns the number of objects in storage matching the given class.
-        If no class is passed, returns the count of all objects in storage.
-        """
-        # Initialize counter to zero
-        count = 0
-
-        # If class name is not defined, count all objects in storage
-        if cls is None:
-            for objs in self.__objects:
-                return len(self.__objects)
-
-        # Else, iterate and check class name of individual objects and compare
-        else:
-            for key, value in self.__objects.items():
-                objs_cls = key.split(".")[0]
-                if cls.__name__ == objs_cls:
-                    count += 1
-
-        return count
