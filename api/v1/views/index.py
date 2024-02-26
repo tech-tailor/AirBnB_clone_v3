@@ -8,7 +8,9 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from models.amenity import Amenity
 from models import storage
+
 
 @app_views.route('/status', methods=["GET"], strict_slashes=False)
 def status():
@@ -16,9 +18,12 @@ def status():
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/status', methods=["GET"], strict_slashes=False)
-""" Endpoint that retrieves the number of each objects by type """
+@app_views.route('/stats', methods=["GET"], strict_slashes=False)
 def stats():
+    """
+    Endpoint that retrieves the number
+      of each objects by type
+    """
     object_counts = {}
     object_counts["amenities"] = storage.count(Amenity)
     object_counts["cities"] = storage.count(City)
