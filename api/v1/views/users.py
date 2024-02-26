@@ -14,7 +14,7 @@ def show_users():
     """
 
     all_users = []
-    users = list(storage.all('User').values())
+    users = list(storage.all(User).values())
     for user in users:
         all_users.append(user.to_dict())
     return jsonify(all_users)
@@ -78,7 +78,7 @@ def update_user(user_id):
     update existing user
     """
     ignore = ['id', 'email', 'created_at', 'updated_at']
-    user = storage.get("User", user_id)
+    user = storage.get(User, user_id)
     if user:
         content = request.get_json(silent=True)
         if isinstance(content, dict):
