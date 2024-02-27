@@ -1,8 +1,7 @@
-#!/usr/bin/python3
-"""
-Api for user views. This view handles default
-view for users.
-"""
+#!/usr/bin/python
+
+"""Api for user views. This view handles default view for users."""
+
 from models import storage
 from flask import jsonify, request, abort
 from api.v1.views import app_views
