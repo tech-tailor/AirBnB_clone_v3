@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Api for users"""
+"""
+Api for users
+"""
 
 from models import storage
 from flask import jsonify, request, abort
