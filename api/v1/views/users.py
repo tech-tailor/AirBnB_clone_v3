@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Api for user view'''
+"""Api for user view"""
 
 # Import necessary modules
 from models import storage
