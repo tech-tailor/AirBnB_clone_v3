@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """Api for user views. This view handles default view for users."""
 
 from models import storage
@@ -13,7 +12,6 @@ def show_users():
     """
     list all users
     """
-
     all_users = []
     users = list(storage.all(User).values())
     for user in users:
