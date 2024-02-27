@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 '''Api for user view'''
 
+# Import necessary modules
 from models import storage
 from flask import jsonify, request, abort
 from api.v1.views import app_views
 from models.user import User
 
-
+# User views to display all users
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def show_users():
     """
@@ -18,7 +19,7 @@ def show_users():
         all_users.append(user.to_dict())
     return jsonify(all_users)
 
-
+# User views to displa a user
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 def display_user(user_id):
     """
@@ -30,7 +31,7 @@ def display_user(user_id):
     else:
         abort(404)
 
-
+# Delete user
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
     """
@@ -44,7 +45,7 @@ def delete_user(user_id):
     else:
         abort(404)
 
-
+# Create new user
 @app_views.route('/users', methods=['POST'], strict_slashes=False)
 def create_user():
     """
@@ -70,7 +71,7 @@ def create_user():
     response.status_code = 400
     return response
 
-
+# Update new user
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def update_user(user_id):
     """
