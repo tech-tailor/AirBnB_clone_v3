@@ -114,8 +114,8 @@ class TestFileStorage(unittest.TestCase):
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
 
-"""test here"""
-@unittest.skipIf(models.storage_t == 'db', "testing db storage")
+    """test here"""
+    @unittest.skipIf(models.storage_t == 'db', "testing db storage")
     def test_get_retrieve_one_object(self):
         """Test get() retrieves just one object with right id"""
         obj = State()
