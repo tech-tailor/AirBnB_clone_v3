@@ -120,6 +120,7 @@ def update_place(place_id):
 
 @app_views.route('/places_search', methods=['POST'], strict_slashes=False)
 def search_places():
+    """ search places"""
     places_list = []
     place_dicts = []
     cities_list = []
